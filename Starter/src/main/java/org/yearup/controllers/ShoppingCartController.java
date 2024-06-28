@@ -8,14 +8,13 @@ import org.springframework.web.server.ResponseStatusException;
 import org.yearup.data.ProductDao;
 import org.yearup.data.ShoppingCartDao;
 import org.yearup.data.UserDao;
+import org.yearup.models.Product;
 import org.yearup.models.ShoppingCart;
 import org.yearup.models.ShoppingCartItem;
 import org.yearup.models.User;
 
 import java.util.Map;
 
-// convert this class to a REST controller
-// only logged in users should have access to these actions
 @RestController
 @RequestMapping("/cart")
 public class ShoppingCartController {
@@ -31,7 +30,6 @@ public class ShoppingCartController {
 
     @GetMapping
     public ShoppingCart getCart() {
-        // Get the logged-in user's username
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userDao.findByUsername(username);
 
@@ -39,7 +37,7 @@ public class ShoppingCartController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
 
-        ShoppingCart cart = shoppingCartDao.findByUserId(user.getUserId());
+        ShoppingCart cart = shoppingCartDao.findByUserId(user.getId());
         return cart;
     }
 
@@ -52,11 +50,11 @@ public class ShoppingCartController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
 
-        ShoppingCartItem item = shoppingCartDao.findByUserIdAndProductId(user.getUserId(), productId);
+        ShoppingCartItem item = shoppingCartDao.findByUserIdAndProductId(user.getId(), productId);
         if (item == null) {
-            shoppingCartDao.addProductToCart(user.getUserId(), productId, 1);
+            shoppingCartDao.addProductToCart(user.getId(), productId, 1);
         } else {
-            shoppingCartDao.updateProductQuantity(user.getUserId(), productId, item.getQuantity() + 1);
+            shoppingCartDao.updateProductQuantity(user.getId(), productId, item.getQuantity() + 1);
         }
     }
 
@@ -74,12 +72,12 @@ public class ShoppingCartController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity is required");
         }
 
-        ShoppingCartItem item = shoppingCartDao.findByUserIdAndProductId(user.getUserId(), productId);
+        ShoppingCartItem item = shoppingCartDao.findByUserIdAndProductId(user.getId(), productId);
         if (item == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found in cart");
         }
 
-        shoppingCartDao.updateProductQuantity(user.getUserId(), productId, quantity);
+        shoppingCartDao.updateProductQuantity(user.getId(), productId, quantity);
     }
 
     @DeleteMapping
@@ -91,6 +89,7 @@ public class ShoppingCartController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
 
-        shoppingCartDao.clearCart(user.getUserId());
+        shoppingCartDao.clearCart(user.getId());
     }
 }
+

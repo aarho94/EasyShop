@@ -19,12 +19,13 @@ public class ShoppingCart {
         return items.containsKey(productId);
     }
 
-    public void add(int productId, int quantity) {
+    public void add(Product product, int quantity) {
+        int productId = product.getProductId();
         if (items.containsKey(productId)) {
             ShoppingCartItem item = items.get(productId);
             item.setQuantity(item.getQuantity() + quantity);
         } else {
-            ShoppingCartItem newItem = new ShoppingCartItem(productId, quantity);
+            ShoppingCartItem newItem = new ShoppingCartItem(product, quantity);
             items.put(productId, newItem);
         }
     }
@@ -48,4 +49,5 @@ public class ShoppingCart {
         return total;
     }
 }
+
 
