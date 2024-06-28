@@ -52,7 +52,6 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         return List.of();
     }
 
-    // return a category object by id
     @Override
     public Category getById(int categoryId)
     {
@@ -84,7 +83,6 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         return null;
     }
 
-    // returning the object inserted in the database
     @Override
     public Category create(Category category)
     {

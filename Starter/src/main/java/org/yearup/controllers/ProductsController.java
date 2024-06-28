@@ -2,72 +2,110 @@ package org.yearup.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.yearup.data.ProductDao;
+import org.springframework.web.server.ResponseStatusException;
 import org.yearup.models.Product;
+import org.yearup.data.ProductDao;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
-public class ProductsController {
-
-    private final ProductDao productDao;
+@RequestMapping("products")
+@CrossOrigin
+public class ProductsController
+{
+    private ProductDao productDao;
 
     @Autowired
-    public ProductsController(ProductDao productDao) {
+    public ProductsController(ProductDao productDao)
+    {
         this.productDao = productDao;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> products = productDao.getAll();
-        return ResponseEntity.ok(products);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable int id) {
-        Product product = productDao.getById(id);
-        if (product != null) {
-            return ResponseEntity.ok(product);
-        } else {
-            return ResponseEntity.notFound().build();
+    @GetMapping("")
+    @PreAuthorize("permitAll()")
+    public List<Product> search(@RequestParam(name="cat", required = false) Integer categoryId,
+                                @RequestParam(name="minPrice", required = false) BigDecimal minPrice,
+                                @RequestParam(name="maxPrice", required = false) BigDecimal maxPrice,
+                                @RequestParam(name="color", required = false) String color
+    )
+    {
+        try
+        {
+            return productDao.search(categoryId, minPrice, maxPrice, color);
+        }
+        catch(Exception ex)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Oops... our bad.");
         }
     }
 
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        Product createdProduct = productDao.create(product);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
+    @GetMapping("{id}")
+    @PreAuthorize("permitAll()")
+    public Product getById(@PathVariable int id )
+    {
+        try
+        {
+            var product = productDao.getById(id);
+
+            if(product == null)
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+            return product;
+        }
+        catch(Exception ex)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Oops... our bad.");
+        }
     }
 
-    @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Product> updateProduct(@PathVariable int id, @RequestBody Product product) {
-        productDao.update(id, product);
-        return ResponseEntity.ok(product);
+    @PostMapping()
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public Product addProduct(@RequestBody Product product)
+    {
+        try
+        {
+            return productDao.create(product);
+        }
+        catch(Exception ex)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Oops... our bad.");
+        }
     }
 
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> deleteProduct(@PathVariable int id) {
-        productDao.delete(id);
-        return ResponseEntity.noContent().build();
+    @PutMapping("{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void updateProduct(@PathVariable int id, @RequestBody Product product)
+    {
+        try
+        {
+            productDao.update(id, product);
+        }
+        catch(Exception ex)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Oops... our bad.");
+        }
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<Product>> searchProducts(
-            @RequestParam(required = false) Integer categoryId,
-            @RequestParam(required = false) BigDecimal minPrice,
-            @RequestParam(required = false) BigDecimal maxPrice,
-            @RequestParam(required = false) String color
-    ) {
-        List<Product> products = productDao.search(categoryId, minPrice, maxPrice, color);
-        return ResponseEntity.ok(products);
+    @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void deleteProduct(@PathVariable int id)
+    {
+        try
+        {
+            var product = productDao.getById(id);
+
+            if(product == null)
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+            productDao.delete(id);
+        }
+        catch(Exception ex)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Oops... our bad.");
+        }
     }
 }
 

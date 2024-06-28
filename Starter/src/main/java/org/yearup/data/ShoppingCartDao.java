@@ -6,6 +6,7 @@ import org.yearup.models.ShoppingCartItem;
 public interface ShoppingCartDao
 {
     ShoppingCart getByUserId(int userId);
+    // add additional method signatures here
 
     ShoppingCart addItem(int userId, int productId);
 
@@ -15,5 +16,3 @@ public interface ShoppingCartDao
 
     ShoppingCart clearCart(int userId);
 }
-
-

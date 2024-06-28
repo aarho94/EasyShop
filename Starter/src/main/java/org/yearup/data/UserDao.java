@@ -10,7 +10,7 @@ public interface UserDao {
 
     User getUserById(int userId);
 
-    User findByUsername(String username); // Corrected method name
+    User findByUsername(String username);
 
     int getIdByUsername(String username);
 
