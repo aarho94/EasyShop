@@ -99,6 +99,11 @@ public class MySqlUserDao extends MySqlDaoBase implements UserDao
     }
 
     @Override
+    public User findByUsername(String username)
+    {
+        return null;
+    }
+
     public User getByUserName(String username)
     {
         String sql = "SELECT * " +
@@ -156,3 +161,6 @@ public class MySqlUserDao extends MySqlDaoBase implements UserDao
         return new User(userId, username,hashedPassword, role);
     }
 }
+
+
+

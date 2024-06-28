@@ -3,16 +3,17 @@ package org.yearup.data;
 import org.yearup.models.ShoppingCart;
 import org.yearup.models.ShoppingCartItem;
 
-public interface ShoppingCartDao {
-    ShoppingCart findByUserId(int userId);
+public interface ShoppingCartDao
+{
+    ShoppingCart getByUserId(int userId);
 
-    ShoppingCartItem findByUserIdAndProductId(int userId, int productId);
+    ShoppingCart addItem(int userId, int productId);
 
-    void addProductToCart(int userId, int productId, int quantity);
+    Boolean isInShoppingCart(int userId, int productId);
 
-    void updateProductQuantity(int userId, int productId, int quantity);
+    ShoppingCart updateShoppingCartItem(int itemId, ShoppingCartItem shoppingCartItem, int userId);
 
-    void clearCart(int userId);
+    ShoppingCart clearCart(int userId);
 }
 
 

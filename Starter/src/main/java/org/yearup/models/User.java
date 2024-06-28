@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class User {
 
-   private int id; // Add the userId field
+   private int id;
    private String username;
    @JsonIgnore
    private String password;
@@ -80,11 +80,6 @@ public class User {
    {
       String authority = role.contains("ROLE_") ? role : "ROLE_" + role;
       this.authorities.add(new Authority(authority));
-   }
-
-   // Add getUserId() method to retrieve user ID
-   public int getUserId() {
-      return id;
    }
 
    @Override
