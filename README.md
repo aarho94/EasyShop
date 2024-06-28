@@ -1,7 +1,7 @@
 # EasyShop
 Backend API for EasyShop e-commerce application built with Spring Boot and MySQL.
 
-
+<img width="1614" alt="Screenshot 2024-06-28 at 12 51 43 PM" src="https://github.com/aarho94/EasyShop/assets/166449365/97c9ea67-95a9-40c9-9a1a-a66a77455c06">
 
 **User Stories and Tasks**
 
