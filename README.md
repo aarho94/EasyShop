@@ -55,3 +55,7 @@ Tasks:
 **Categories Filters**
 
 <img width="339" alt="Screenshot 2024-06-28 at 7 54 10 AM" src="https://github.com/aarho94/EasyShop/assets/166449365/d6e1189b-fc33-445c-b57c-524605c569f4">
+
+**Price Filter**
+
+<img width="872" alt="Screenshot 2024-06-28 at 7 56 12 AM" src="https://github.com/aarho94/EasyShop/assets/166449365/3bbedc25-41ac-4416-a2b0-7ef97df72eaf">
