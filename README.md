@@ -59,3 +59,15 @@ Tasks:
 **Price Filter**
 
 <img width="872" alt="Screenshot 2024-06-28 at 7 56 12 AM" src="https://github.com/aarho94/EasyShop/assets/166449365/3bbedc25-41ac-4416-a2b0-7ef97df72eaf">
+
+**Postman Tests for Bug fixes**
+
+<img width="796" alt="Screenshot 2024-06-28 at 12 55 43 PM" src="https://github.com/aarho94/EasyShop/assets/166449365/1aec8d9f-7570-43e2-bd59-518f0253ab05">
+
+I really enjoyed setting up the CategoriesController class, and figuring out what data to pull in to make it work!
+
+<img width="813" alt="Screenshot 2024-06-28 at 12 56 55 PM" src="https://github.com/aarho94/EasyShop/assets/166449365/112f746a-0241-48e8-b4bf-4f45f9101468">
+
+Debugging the filters in the product dao was also really satisfying when all was finished!
+
+<img width="906" alt="Screenshot 2024-06-28 at 12 59 00 PM" src="https://github.com/aarho94/EasyShop/assets/166449365/a8e7ed8f-f27a-454f-9353-91e28364ce32">
