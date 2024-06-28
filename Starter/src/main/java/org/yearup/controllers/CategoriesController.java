@@ -27,7 +27,6 @@ public class CategoriesController
         this.productDao = productDao;
     }
 
-    // getting all categorys from dao
     @GetMapping("")
     public List<Category> getAll()
     {
