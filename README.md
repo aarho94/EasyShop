@@ -47,3 +47,7 @@ Tasks:
 - Implement PUT endpoint for updating an existing category.
 - Implement DELETE endpoint for removing a category.
 - Add authentication and authorization to ensure only admins can modify categories.
+
+**Home Screen**
+
+<img width="1907" alt="Screenshot 2024-06-28 at 7 51 42 AM" src="https://github.com/aarho94/EasyShop/assets/166449365/786c038b-8125-42a2-bc13-5bb60b7e8232">
