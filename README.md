@@ -51,3 +51,7 @@ Tasks:
 **Home Screen**
 
 <img width="1907" alt="Screenshot 2024-06-28 at 7 51 42 AM" src="https://github.com/aarho94/EasyShop/assets/166449365/786c038b-8125-42a2-bc13-5bb60b7e8232">
+
+**Categories Filters**
+
+<img width="339" alt="Screenshot 2024-06-28 at 7 54 10 AM" src="https://github.com/aarho94/EasyShop/assets/166449365/d6e1189b-fc33-445c-b57c-524605c569f4">
